@@ -5,51 +5,51 @@ import (
 	"math/rand"
 )
 
-type patient struct {
-	name   string
-	health int
+type Patient struct {
+	Name   string
+	Health int
 }
 
-type drug struct {
-	name string
-	tox  int
+type Drug struct {
+	Name string
+	Tox  int
 }
 
-type event struct {
-	name string
-	tox  int
+type Event struct {
+	Name string
+	Tox  int
 }
 
-//giveMed will modify the .health field of a single element of the slice of type patient according to
+//GiveMed will modify the .health field of a single element of the slice of type patient according to
 //the .tox value of single element of the slice of type drug
-func giveMed(p []patient, d []drug, k int, n int) {
-	fmt.Printf("Hai somministrato %v a %v.\n", d[n-1].name, p[k-1].name)
-	p[k-1].health = p[k-1].health + d[n-1].tox
+func GiveMed(p []Patient, d []Drug, k int, n int) {
+	fmt.Printf("Hai somministrato %v a %v.\n", d[n-1].Name, p[k-1].Name)
+	p[k-1].Health = p[k-1].Health + d[n-1].Tox
 	if n == 2 || n == 6 {
-		fmt.Printf("%v non si sente troppo bene.\n", p[k-1].name)
+		fmt.Printf("%v non si sente troppo bene.\n", p[k-1].Name)
 		if n == 6 {
-			fmt.Printf("%v ha un'aura verde fosforescente.\n", p[k-1].name)
+			fmt.Printf("%v ha un'aura verde fosforescente.\n", p[k-1].Name)
 		}
 	} else if n == 5 {
-		fmt.Printf("%v si sente esattamente come prima.\n", p[k-1].name)
+		fmt.Printf("%v si sente esattamente come prima.\n", p[k-1].Name)
 	} else {
-		fmt.Printf("%v si sente meglio.\n", p[k-1].name)
+		fmt.Printf("%v si sente meglio.\n", p[k-1].Name)
 	}
 }
 
-//spawnEvent will choose a single random element from a slice of type event and
+//SpawnEvent will choose a single random element from a slice of type event and
 //modify the .health field of a single element of the slice of type patient according to
 //the .tox value of single element of the slice of type event
-func spawnEvent(e []event, p []patient, k int) {
+func SpawnEvent(e []Event, p []Patient, k int) {
 	n := rand.Intn(10)
-	fmt.Print(e[n].name)
-	p[k-1].health += e[n].tox
+	fmt.Print(e[n].Name)
+	p[k-1].Health += e[n].Tox
 	return
 }
 
-//removePat will remove a single element from a slice of type patient and return a new slice
+//RemovePat will remove a single element from a slice of type patient and return a new slice
 //with all the other elements in the same order
-func removePat(p []patient, id int) []patient {
+func RemovePat(p []Patient, id int) []Patient {
 	p = append(p[:id], p[id+1:]...)
 	return p
 }
